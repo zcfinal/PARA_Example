@@ -110,7 +110,7 @@ print(cnn)
 # 优化器选择Adam
 optimizer = torch.optim.Adam(cnn.parameters(), lr=LR)
 # 损失函数
-loss_func = nn.CrossEntropyLoss()  # 目标标签是one-hotted
+loss_func = nn.CrossEntropyLoss().cuda()  # 目标标签是one-hotted
 
 # 开始训练
 for epoch in range(EPOCH):
@@ -122,9 +122,9 @@ for epoch in range(EPOCH):
         optimizer.step()  # 应用梯度
 
         if step % 50 == 0:
-            test_output = cnn(test_x)
-            pred_y = torch.max(test_output, 1)[1].data.numpy()
-            accuracy = float((pred_y == test_y.data.numpy()).astype(int).sum()) / float(test_y.size(0))
-            print('Epoch: ', epoch, '| train loss: %.4f' % loss.data.numpy(), '| test accuracy: %.2f' % accuracy)
+            test_output = cnn(test_x.cuda())
+            pred_y = torch.max(test_output, 1)[1]
+            accuracy = (pred_y == test_y.cuda()).float().mean()
+            print('Epoch: ', epoch, '| train loss: %.4f' % loss.item(), '| test accuracy: %.2f' % accuracy.item())
 
 
