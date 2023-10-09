@@ -34,6 +34,10 @@ conda create --name zhangchao python=3.8
 
 conda activate zhangchao
 
+宁夏超算：
+跟往常pip安装一样。
+
+北京超算：（
 pip install /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/*.whl
 
 安装对应版本的pytorch，需要源码编译。
@@ -42,8 +46,19 @@ cat /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/env.sh
 
 安装完成后可在对应目录下查看env.sh信息。
 
-不需要GPU的模块可以直接pip或conda安装，pip源一定要使用默认配置的源。
+不需要GPU的模块可以直接pip或conda安装，pip源一定要使用默认配置的源。）
 
 ![Alt text](image-3.png)
 
 4. 提交程序。
+
+sbatch --gpus=1 run.sh
+
+parajobs查看状态
+
+5. 查看结果
+
+查看*.out的文件。
+
+![Alt text](image-4.png)
+
