@@ -101,7 +101,7 @@ class CNN(nn.Module):  # 我们建立的CNN继承nn.Module这个模块
         return output
 
 
-cnn = CNN()
+cnn = CNN().cuda()
 print(cnn)
 
 # 训练
@@ -113,38 +113,18 @@ optimizer = torch.optim.Adam(cnn.parameters(), lr=LR)
 loss_func = nn.CrossEntropyLoss()  # 目标标签是one-hotted
 
 # 开始训练
-# for epoch in range(EPOCH):
-#     for step, (b_x, b_y) in enumerate(train_loader):  # 分配batch data
-#         output = cnn(b_x)  # 先将数据放到cnn中计算output
-#         loss = loss_func(output, b_y)  # 输出和真实标签的loss，二者位置不可颠倒
-#         optimizer.zero_grad()  # 清除之前学到的梯度的参数
-#         loss.backward()  # 反向传播，计算梯度
-#         optimizer.step()  # 应用梯度
-#
-#         if step % 50 == 0:
-#             test_output = cnn(test_x)
-#             pred_y = torch.max(test_output, 1)[1].data.numpy()
-#             accuracy = float((pred_y == test_y.data.numpy()).astype(int).sum()) / float(test_y.size(0))
-#             print('Epoch: ', epoch, '| train loss: %.4f' % loss.data.numpy(), '| test accuracy: %.2f' % accuracy)
-#
-# torch.save(cnn.state_dict(), 'cnn2.pkl')#保存模型
+for epoch in range(EPOCH):
+    for step, (b_x, b_y) in enumerate(train_loader):  # 分配batch data
+        output = cnn(b_x.cuda())  # 先将数据放到cnn中计算output
+        loss = loss_func(output, b_y.cuda())  # 输出和真实标签的loss，二者位置不可颠倒
+        optimizer.zero_grad()  # 清除之前学到的梯度的参数
+        loss.backward()  # 反向传播，计算梯度
+        optimizer.step()  # 应用梯度
 
-# 加载模型，调用时需将前面训练及保存模型的代码注释掉，否则会再训练一遍
-cnn.load_state_dict(torch.load('cnn2.pkl'))
-cnn.eval()
-# print 10 predictions from test data
-inputs = test_x[:32]  # 测试32个数据
-test_output = cnn(inputs)
-pred_y = torch.max(test_output, 1)[1].data.numpy()
-print(pred_y, 'prediction number')  # 打印识别后的数字
-# print(test_y[:10].numpy(), 'real number')
+        if step % 50 == 0:
+            test_output = cnn(test_x)
+            pred_y = torch.max(test_output, 1)[1].data.numpy()
+            accuracy = float((pred_y == test_y.data.numpy()).astype(int).sum()) / float(test_y.size(0))
+            print('Epoch: ', epoch, '| train loss: %.4f' % loss.data.numpy(), '| test accuracy: %.2f' % accuracy)
 
-img = torchvision.utils.make_grid(inputs)
-img = img.numpy().transpose(1, 2, 0)
 
-# 下面三行为改变图片的亮度
-# std = [0.5, 0.5, 0.5]
-# mean = [0.5, 0.5, 0.5]
-# img = img * std + mean
-cv2.imshow('win', img)  # opencv显示需要识别的数据图片
-key_pressed = cv2.waitKey(0)
