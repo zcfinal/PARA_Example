@@ -36,10 +36,13 @@ conda create --name zhangchao python=3.8
 
 ![Alt text](image-2.png)
 
-conda activate zhangchao
+module加载anaconda软件后，source activate zhangchao，激活环境。
 
 北京超算：（
-pip install /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/*.whl
+
+由于该分区机器是arm架构，使用关于gpu的包不能利用pip直接安装。
+
+安装pytorch方式：pip install /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/*.whl (可能容易产生下载超时的报错，需要手动换源安装其他依赖包，比较麻烦。可以先使用一些已经安装配置好的conda环境，例如：py39_torch1.9.1_cu111)
 
 安装对应版本的pytorch，需要源码编译。
 
@@ -47,13 +50,13 @@ cat /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/env.sh
 
 安装完成后可在对应目录下查看env.sh信息。
 
-不需要GPU的模块可以直接pip或conda安装，pip源一定要使用默认配置的源。）
+不需要GPU的模块可以直接pip或conda安装。）
 
 ![Alt text](image-3.png)
 
 4. 提交程序。
 
-sbatch --gpus=1 run.sh
+sbatch --gpus=1 -p vip_gpu_scx6387 run.sh
 
 parajobs查看状态
 
