@@ -64,5 +64,6 @@ parajobs查看状态
 可以修改日志的保存路径
 
 sbatch -o 日志文件名
+
 sbatch -e 错误文件名
 
