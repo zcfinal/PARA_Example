@@ -4,6 +4,8 @@
 
 我们的例子是希望在平台上跑手写数字识别任务。
 
+我们连接北京超级云scx6387的超算账号，这个账号下有8张40G A100的机器。
+
 我们需要将数据、代码上传，并配置环境、提交程序，最后查看结果。
 
 1. 上传数据。
@@ -34,9 +36,6 @@ conda create --name zhangchao python=3.8
 
 conda activate zhangchao
 
-宁夏超算：
-跟往常pip安装一样。
-
 北京超算：（
 pip install /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/*.whl
 
@@ -61,4 +60,9 @@ parajobs查看状态
 查看*.out的文件。
 
 ![Alt text](image-4.png)
+
+可以修改日志的保存路径
+
+sbatch -o 日志文件名
+sbatch -e 错误文件名
 
