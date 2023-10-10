@@ -72,3 +72,8 @@ sbatch -o 日志文件名
 
 sbatch -e 错误文件名
 
+
+
+另外的一些命令：
+
+1. scontrol show job 作业号，查看提交脚本以及运行环境
