@@ -36,7 +36,7 @@ conda create --name zhangchao python=3.8
 
 ![Alt text](image-2.png)
 
-module加载anaconda软件后，source activate zhangchao，激活环境。
+module加载anaconda软件后，source/conda activate zhangchao，激活环境。
 
 北京超算：（
 
