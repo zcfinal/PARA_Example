@@ -42,7 +42,7 @@ module加载anaconda软件后，source/conda activate zhangchao，激活环境�
 
 由于该分区机器是arm架构，使用关于gpu的包不能利用pip直接安装。
 
-安装pytorch方式：pip install /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/*.whl (可能容易产生下载超时的报错，需要手动换源安装其他依赖包，比较麻烦。可以先使用一些已经安装配置好的conda环境，例如：py39_torch1.9.1_cu111)
+安装pytorch方式：pip install /home/bingxing2/apps/package/pytorch/1.13.1+cu117_cp38/*.whl (可能容易产生下载超时的报错，需要手动换源安装其他依赖包，比较麻烦。可以先使用一些已经安装配置好的conda环境，例如：py39_torch1.9.1_cu111。如果环境一直存在问题，可以联系各小组联络人。联络人会向平台工程师反馈，让其协助安装。)
 
 安装对应版本的pytorch，需要源码编译。
 
