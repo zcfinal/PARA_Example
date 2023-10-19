@@ -2,6 +2,8 @@
 
 为了方便同学们使用并行云平台，现在提供一个简单的例子。（更加详细的使用指南请查看![北京超级云计算中心N32-H分区用户手册v2.7.pdf](https://github.com/zcfinal/PARA_Example/blob/master/%E5%8C%97%E4%BA%AC%E8%B6%85%E7%BA%A7%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%AD%E5%BF%83N32-H%E5%88%86%E5%8C%BA%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8Cv2.7.pdf)）
 
+登陆服务器网站：https://cloud.paratera.com/
+
 我们的例子是希望在平台上跑手写数字识别任务。
 
 我们连接北京超级云scx6387的超算账号，这个账号下有8张40G A100的机器。
